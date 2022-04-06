@@ -1,0 +1,34 @@
+spring:
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/test
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        default_batch_fetch_size: 100 #컬렉션에서 있는 모든 엔티티에 select 쿼리를 날리지 않고 IN 절로 한 번에 조회
+        #장점
+        #   쿼리 호출 수가 1 + N 1 + 1 로 최적화 된다.
+        #   조인보다 DB 데이터 전송량이 최적화 된다. (Order와 OrderItem을 조인하면 Order가
+        #   OrderItem 만큼 중복해서 조회된다. 이 방법은 각각 조회하므로 전송해야할 중복 데이터가 없다.)
+        #   페치 조인 방식과 비교해서 쿼리 호출 수가 약간 증가하지만, DB 데이터 전송량이 감소한다.
+        #   컬렉션 페치 조인은 페이징이 불가능 하지만 이 방법은 페이징이 가능하다.
+        #결론
+        #   ToOne 관계는 페치 조인해도 페이징에 영향을 주지 않는다. 따라서 ToOne 관계는 페치조인으로
+        #   쿼리 수를 줄이고 해결하고, 나머지는 hibernate.default_batch_fetch_size 로 최적화 하자.
+    open-in-view: true
+    #OSIV를 끄면 트랜잭션을 종료할 때 영속성 컨텍스트를 닫고, 데이터베이스 커넥션도 반환한다. 따라서
+    #커넥션 리소스를 낭비하지 않는다.
+
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+
+logging.level:
+  org.hibernate.SQL: debug
+# org.hibernate.type: trace
