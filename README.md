@@ -16,3 +16,6 @@
 
 ## toby-spring
 [토비의 스프링 3.1](http://www.kyobobook.co.kr/product/detailViewKor.laf?mallGb=KOR&ejkGb=KOR&barcode=9788960773431)
+
+## jsp-project
+[newlecture Servlet & JSP 프로그래밍](https://www.youtube.com/watch?v=drCj2k50j_k&list=PLq8wAnVUcTFVOtENMsujSgtv2TOsMy8zd)
