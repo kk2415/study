@@ -1,27 +1,27 @@
 package study.datajpa.entity;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import javax.persistence.Column;
+import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
 import java.time.LocalDateTime;
 
+@EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
-public class BaseEntityV1 {
+public class BaseEntityV2 {
+
+    /**
+     * main클래스에 @EnableJpaAuditing 애노테이션 붙여야됨
+     * */
 
     @Column(updatable = false)
+    @CreatedDate
     private LocalDateTime createdDate;
 
-    private LocalDateTime updatedDate;
+    @LastModifiedDate
+    private LocalDateTime lastModifiedDate;
 
-    @PrePersist
-    public void prePersist() {
-        createdDate = LocalDateTime.now();
-        updatedDate = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    public void preUpdate() {
-        updatedDate = LocalDateTime.now();
-    }
 }

@@ -1,6 +1,5 @@
 package study.datajpa.repository;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -8,18 +7,19 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
+import study.datajpa.DataJpaApplication;
 import study.datajpa.entity.Member;
 
 import java.util.List;
 
-@SpringBootTest
 @Transactional
+@SpringBootTest(classes = DataJpaApplication.class)
 class MemberRepositoryTest {
 
     @Autowired MemberRepository memberRepository;
 
     @Test
-    public void 페이징_테스트() {
+    public void paging_test() {
         memberRepository.save(new Member("memberH", 15L));
         memberRepository.save(new Member("memberE", 20L));
         memberRepository.save(new Member("memberA", 26L));

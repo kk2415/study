@@ -1,6 +1,8 @@
 package study.datajpa.entity;
 
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -11,17 +13,16 @@ import java.time.LocalDateTime;
 
 @EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
-public class BaseEntityV2 {
+public class BaseEntityV3 extends BaseTimeEntity {
 
     /**
-     * main클래스에 @EnableJpaAuditing 애노테이션 붙여야됨
+     * 생성자, 수성자 정보작 필요없는 테이블은 BaseTimeEntity를 쓰고 필요한 테이블은 BaseEntityV3를 이용
      * */
-
     @Column(updatable = false)
-    @CreatedDate
-    private LocalDateTime createdDate;
+    @CreatedBy
+    private String createdBy;
 
-    @LastModifiedDate
-    private LocalDateTime lastModifiedDate;
+    @LastModifiedBy
+    private String lastModifiedBy;
 
 }
