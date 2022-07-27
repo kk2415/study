@@ -50,8 +50,7 @@ public class AptDealInsertJobConfig {
     @Bean
     public Job aptDealInsertJob(
             Step aptDealInsertStep,
-            Step guLawdCdStep,
-            Step stepContextPrintStep
+            Step guLawdCdStep
     ) {
         return jobBuilderFactory.get("aptDealInsertJob")
                 .incrementer(new RunIdIncrementer())
@@ -62,7 +61,8 @@ public class AptDealInsertJobConfig {
                 .on("CONTINUABLE").to(aptDealInsertStep).next(guLawdCdStep)
 
                 // guLawdCdStep 실행했는데 상태가 CONTINUABLE이 아니면 종료
-                .from(guLawdCdStep).on("*").end()
+                .from(guLawdCdStep)
+                .on("*").end()
                 .end()
                 .build();
     }
