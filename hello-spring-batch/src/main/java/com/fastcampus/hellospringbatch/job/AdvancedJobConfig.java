@@ -46,6 +46,7 @@ public class AdvancedJobConfig {
         return new JobExecutionListener() {
             @Override
             public void beforeJob(JobExecution jobExecution) {
+                log.info("한글");
                 log.info("[JobExecutionListener] beforeJob jobExecution status = {}", jobExecution.getStatus());
             }
 

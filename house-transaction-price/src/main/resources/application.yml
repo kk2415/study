@@ -12,20 +12,25 @@ spring:
     activate:
       on-profile: local
   datasource:
-    url: jdbc:mysql://localhost:3367/house_batch
+    url: jdbc:mysql://localhost:3367/batch_house
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: house
-    password: house
+    username: root
+    password: password
   jpa:
-    show-sql: true
     generate-ddl: false
     hibernate:
       ddl-auto: none
+    show-sql: true
   batch:
     jdbc:
       initialize-schema: ALWAYS
 
+external:
+  apartment-api:
+    path: http://openapi.molit.go.kr:8081/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcAptTrade
+    serviceKey: XnMwuXZIbK2gUt8vnJTnptpJtRpGQqQRP0fQ15OaRDif3q8%2F39rzOiYKHE3Ct00wi38yEc3C6BrbvQbXGcU7KQ%3D%3D
 ---
+
 spring:
   config:
     activate:
